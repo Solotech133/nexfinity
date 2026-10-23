@@ -7,6 +7,7 @@ const filters = [
   ["web", "Web"],
   ["brand", "Branding"],
   ["social", "Social"],
+  ["logo", "Logo"],
 ];
 
 // muted looping preview: plays when on screen, pauses when off screen
@@ -103,7 +104,7 @@ export default function Portfolio() {
               ) : (
                 w.img && (
                   <img
-                    className="work-img"
+                    className={w.cat === "logo" ? "work-img contain" : "work-img"}
                     src={w.img}
                     alt={w.title}
                     loading="lazy"

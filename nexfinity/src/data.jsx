@@ -33,7 +33,8 @@ export const works = [
   { cat: "web", tag: "Web · portfolio website", title: "Solomon Dev", img: "/images/solomondev.jpg", bg: "linear-gradient(135deg,#050505,#39ff1450)", href: "#" },
   { cat: "brand", tag: "Branding", title: "De Sent one brand identity", img: "/images/desent.jpg", bg: "linear-gradient(135deg,#0f2f0f,#111)", href: "#" },
   { cat: "social", tag: "Social · Instagram", title: "De Sent one Gadgets Social media flyers", img: "/images/desentsocial.jpg", bg: "linear-gradient(135deg,#39ff1425,#000)", href: "#" },
-];
+   { cat: "Logo", tag: "Logo", title: "Logos", img: "/images/logo.jpg", bg: "linear-gradient(135deg,#39ff1425,#000)", href: "#" },
+]
 
 export const steps = [
   { title: "Discover", text: "We dig into your goals, audience and market." },
@@ -43,8 +44,8 @@ export const steps = [
 ];
 
 export const plans = [
-  { name: "Starter", monthly: "$799", project: "$2,500", features: ["Landing page or brand kit", "2 revisions per round", "Email support"], cta: "Get started" },
-  { name: "Growth", monthly: "$1,899", project: "$7,500", pop: true, features: ["Full website or web app", "Social content (12 posts)", "Priority support", "Monthly strategy call"], cta: "Get started" },
+  { name: "Starter", monthly: "$200", project: "$500", features: ["Landing page or brand kit", "2 revisions per round", "Email support"], cta: "Get started" },
+  { name: "Growth", monthly: "$500", project: "$800", pop: true, features: ["Full website or web app", "Social content (7 posts)", "Priority support", "Monthly strategy call"], cta: "Get started" },
   { name: "Scale", monthly: "Custom", project: "Custom", features: ["Dedicated team", "AI & automation builds", "Performance marketing", "24/7 support"], cta: "Talk to us" },
 ];
 
