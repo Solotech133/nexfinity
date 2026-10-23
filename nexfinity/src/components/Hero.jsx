@@ -1,4 +1,4 @@
-import Reveal from "./Reveal";
+import Reveal from "./reveal.jsx";
 
 export default function Hero() {
   return (

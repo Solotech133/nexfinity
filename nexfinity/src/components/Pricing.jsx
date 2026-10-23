@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Reveal from "./reveal";
+import Reveal from "./reveal.jsx";
 import { plans } from "../data";
 
 export default function Pricing() {
