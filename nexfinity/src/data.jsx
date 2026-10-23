@@ -29,12 +29,12 @@ export const stats = [
 export const works = [
   { cat: "web", tag: "Web · Restaurant", title: "Savora Resturant", img: "/images/savora.jpg", bg: "linear-gradient(135deg,#0b3d0b,#021a02)", href: "#" },
   { cat: "brand", tag: "Branding", title: "Forcepx Identity", img: "/images/forcepx.jpg", bg: "linear-gradient(135deg,#1a1a1a,#39ff1440)", href: "#" },
- { cat: "social", tag: "Social · TikTok", title: "Nexfinity launch", video: "/videos/nexfinitylaunch.mp4", img: "/images/nexfinity-launch.jpg", bg: "linear-gradient(135deg,#00e67630,#050505)", href: "#" },
+  { cat: "social", tag: "Social · TikTok", title: "Nexfinity launch", video: "/videos/nexfinitylaunch.mp4", img: "/images/nexfinity-launch.jpg", bg: "linear-gradient(135deg,#00e67630,#050505)", href: "#" },
   { cat: "web", tag: "Web · portfolio website", title: "Solomon Dev", img: "/images/solomondev.jpg", bg: "linear-gradient(135deg,#050505,#39ff1450)", href: "#" },
   { cat: "brand", tag: "Branding", title: "De Sent one brand identity", img: "/images/desent.jpg", bg: "linear-gradient(135deg,#0f2f0f,#111)", href: "#" },
   { cat: "social", tag: "Social · Instagram", title: "De Sent one Gadgets Social media flyers", img: "/images/desentsocial.jpg", bg: "linear-gradient(135deg,#39ff1425,#000)", href: "#" },
-   { cat: "Logo", tag: "Logo", title: "Logos", img: "/images/logo.jpg", bg: "linear-gradient(135deg,#39ff1425,#000)", href: "#" },
-]
+  { cat: "logo", tag: "Logo", title: "Logos", img: "/images/logo.jpg", bg: "linear-gradient(135deg,#39ff1425,#000)", href: "#" },
+];
 
 export const steps = [
   { title: "Discover", text: "We dig into your goals, audience and market." },
