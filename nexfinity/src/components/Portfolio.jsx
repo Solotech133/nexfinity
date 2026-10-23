@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Reveal from "./Reveal";
+import Reveal from "./reveal";
 import { works, LINKS } from "../data";
 
 const filters = [
