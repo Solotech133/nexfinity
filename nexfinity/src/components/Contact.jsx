@@ -1,4 +1,4 @@
-import Reveal from "./reveal";
+import Reveal from "./reveal.jsx";
 import { FaFacebookF, FaInstagram, FaTiktok, FaDribbble, FaGoogleDrive } from "react-icons/fa";
 import { LINKS } from "../data";
 
