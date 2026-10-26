@@ -391,4 +391,11 @@ footer .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
   html{scroll-behavior:auto}
   *,*:before,*:after{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
+
+
+  /* image preview window */
+.lightbox{flex-direction:column;gap:14px}
+.lightbox img{max-width:min(92vw,1000px);max-height:80vh;border-radius:16px;border:1px solid var(--line);box-shadow:var(--glow);background:#000;object-fit:contain}
+.lb-title{color:var(--tx);font-weight:700;text-align:center}
 }
+
