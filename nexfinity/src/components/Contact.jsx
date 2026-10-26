@@ -39,7 +39,8 @@ export default function Contact() {
           <input name="name" placeholder="Your name" required />
           <input name="email" type="email" placeholder="Your email" required />
          <div className="field">
-  <label htmlFor="service">Tell us about your project</label>
+  <label htmlFor="service">Tell us about your project</label> 
+  
   <textarea
     id="service"
     name="service"
