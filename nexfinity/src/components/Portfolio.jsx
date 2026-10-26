@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Reveal from "./reveal.jsx";
+import Reveal from "./Reveal";
 import { works, LINKS } from "../data";
 
 const filters = [
@@ -9,6 +9,8 @@ const filters = [
   ["social", "Social"],
   ["logo", "Logo"],
 ];
+
+const isLink = (w) => w.href && w.href !== "#";
 
 // muted looping preview: plays when on screen, pauses when off screen
 function PreviewVideo({ src, poster }) {
@@ -45,15 +47,25 @@ function PreviewVideo({ src, poster }) {
 
 export default function Portfolio() {
   const [f, setF] = useState("all");
-  const [open, setOpen] = useState(null); // work whose video is open
+  const [open, setOpen] = useState(null); // work shown in the preview window
   const shown = works.filter((w) => f === "all" || w.cat === f);
 
-  // close the player with the Escape key
+  // close the preview with the Escape key
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && setOpen(null);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  const handleClick = (e, w) => {
+    if (isLink(w)) return; // website: let the link open normally
+    if (w.video || w.img) {
+      e.preventDefault();
+      setOpen(w);
+    } else {
+      e.preventDefault();
+    }
+  };
 
   return (
     <section id="work">
@@ -85,16 +97,11 @@ export default function Portfolio() {
               as="a"
               key={w.title}
               href={w.href}
+              target={isLink(w) ? "_blank" : undefined}
+              rel={isLink(w) ? "noreferrer" : undefined}
               className="work"
               style={{ "--bgp": w.bg }}
-              onClick={
-                w.video
-                  ? (e) => {
-                      e.preventDefault();
-                      setOpen(w);
-                    }
-                  : undefined
-              }
+              onClick={(e) => handleClick(e, w)}
             >
               {w.video ? (
                 <>
@@ -111,6 +118,7 @@ export default function Portfolio() {
                   />
                 )
               )}
+              {isLink(w) && <span className="play-badge">↗</span>}
               <div>
                 <small>{w.tag}</small>
                 <h3>{w.title}</h3>
@@ -144,14 +152,23 @@ export default function Portfolio() {
           <button className="lb-close" onClick={() => setOpen(null)}>
             ✕
           </button>
-          <video
-            src={open.video}
-            poster={open.img}
-            controls
-            autoPlay
-            playsInline
-            onClick={(e) => e.stopPropagation()}
-          />
+          {open.video ? (
+            <video
+              src={open.video}
+              poster={open.img}
+              controls
+              autoPlay
+              playsInline
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img
+              src={open.img}
+              alt={open.title}
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
+          <p className="lb-title">{open.title}</p>
         </div>
       )}
     </section>
