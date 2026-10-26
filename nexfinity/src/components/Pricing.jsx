@@ -1,7 +1,8 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reveal from "./reveal.jsx";
 import { plans } from "../data";
+import "./Pricing.css";
 
 export default function Pricing() {
   const [monthly, setMonthly] = useState(true);
@@ -10,64 +11,80 @@ export default function Pricing() {
   const [clientEmail, setClientEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handlePlanSelect = (plan) => {
+  useEffect(() => {
+    if (!selectedPlan) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setSelectedPlan(null);
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
+    };
+  }, [selectedPlan]);
+
+  function selectPlan(plan) {
     const billingType = monthly ? "Monthly subscription" : "One-time project";
     const price = monthly ? plan.monthly : plan.project;
     const features = monthly
-      ? plan.monthlyFeatures ?? plan.features ?? []
-      : plan.projectFeatures ?? plan.features ?? [];
+      ? plan.monthlyFeatures
+      : plan.projectFeatures;
 
     setSelectedPlan({
-      name: plan.name,
+      ...plan,
       billingType,
       price,
       features,
     });
 
+    setClientName("");
+    setClientEmail("");
     setMessage(
-      `Hello Nexfinity,\n\nI'm interested in the ${plan.name} plan.\n\n` +
+      `Hello Nexfinity,\n\nI am interested in the ${plan.name} plan.\n\n` +
       `Billing type: ${billingType}\nPrice: ${price}\n\n` +
-      `Selected features:\n${features.map((f) => `- ${f}`).join("\n")}\n\n` +
-      "Please contact me with the next steps."
+      `Selected services:\n${features.map((feature) => `• ${feature}`).join("\n")}\n\n` +
+      "Please contact me to discuss the next steps."
     );
+  }
 
-    document.getElementById("pricing-inquiry")?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  };
-
-  const handleSendEmail = (e) => {
-    e.preventDefault();
-
+  function sendEmail(event) {
+    event.preventDefault();
     if (!selectedPlan) return;
 
     const subject = `${selectedPlan.name} Plan Inquiry - Nexfinity`;
 
     const body =
-      `Client name: ${clientName}\n` +
-      `Client email: ${clientEmail}\n\n` +
+      `Name: ${clientName}\n` +
+      `Email: ${clientEmail}\n\n` +
       message;
 
-    const mailto =
+    window.location.href =
       `mailto:nexfinity97@gmail.com?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-  };
+  }
 
   return (
     <section id="pricing">
       <div className="wrap center-text">
         <span className="tag">Pricing</span>
+
         <h2>
           Simple plans, <span className="g">serious results</span>
         </h2>
 
-        <div className="toggle">
+        <p className="pricing-intro">
+          Flexible options for businesses ready to build, grow, and scale.
+        </p>
+
+        <div className="toggle" aria-label="Choose pricing type">
           <button
             type="button"
             className={monthly ? "on" : ""}
+            aria-pressed={monthly}
             onClick={() => setMonthly(true)}
           >
             Monthly
@@ -76,6 +93,7 @@ export default function Pricing() {
           <button
             type="button"
             className={!monthly ? "on" : ""}
+            aria-pressed={!monthly}
             onClick={() => setMonthly(false)}
           >
             Project
@@ -83,86 +101,164 @@ export default function Pricing() {
         </div>
 
         <div className="plans">
-          {plans.map((p, i) => (
-            <Reveal
-              key={p.name}
-              className={`plan ${p.pop ? "pop" : ""}`}
-              delay={i * 80}
-            >
-              <h3>{p.name}</h3>
+          {plans.map((plan, index) => {
+            const price = monthly ? plan.monthly : plan.project;
+            const features = monthly
+              ? plan.monthlyFeatures
+              : plan.projectFeatures;
 
-              <div className="price">
-                {monthly ? p.monthly : p.project}
-                {(monthly ? p.monthly : p.project) !== "Custom" && (
-                  <small>{monthly ? " /mo" : " /project"}</small>
-                )}
+            return (
+              <Reveal
+                key={plan.name}
+                className={`plan ${plan.pop ? "pop" : ""}`}
+                delay={index * 80}
+              >
+                {plan.pop && <span className="plan-badge">Most popular</span>}
+
+                <h3>{plan.name}</h3>
+
+                <div className="price">
+                  {price}
+                  {price !== "Custom" && (
+                    <small>{monthly ? " /mo" : " /project"}</small>
+                  )}
+                </div>
+
+                <p className="plan-description">
+                  {plan.name === "Starter"
+                    ? "The essentials to establish your digital presence."
+                    : plan.name === "Growth"
+                    ? "Everything you need to grow your brand and business."
+                    : "Tailored solutions for ambitious, evolving businesses."}
+                </p>
+
+                <ul>
+                  {features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+
+                <button
+                  type="button"
+                  className={`btn plan-cta ${plan.pop ? "p" : ""}`}
+                  onClick={() => selectPlan(plan)}
+                >
+                  {plan.cta}
+                </button>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+
+      {selectedPlan && (
+        <div
+          className="pricing-modal-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedPlan(null);
+            }
+          }}
+        >
+          <section
+            className="pricing-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pricing-modal-title"
+          >
+            <button
+              type="button"
+              className="pricing-modal-close"
+              onClick={() => setSelectedPlan(null)}
+              aria-label="Close inquiry form"
+            >
+              ×
+            </button>
+
+            <div className="modal-heading">
+              <span className="tag">PLAN INQUIRY</span>
+              <h2 id="pricing-modal-title">
+                Let's build something <span className="g">great.</span>
+              </h2>
+              <p>
+                Your selected package is ready. Review the details and send
+                your inquiry to our team.
+              </p>
+            </div>
+
+            <div className="selected-plan-summary">
+              <div>
+                <span className="summary-label">SELECTED PLAN</span>
+                <h3>{selectedPlan.name}</h3>
+                <p>{selectedPlan.billingType}</p>
               </div>
 
-              <ul>
-                {(monthly
-                  ? p.monthlyFeatures ?? p.features ?? []
-                  : p.projectFeatures ?? p.features ?? []
-                ).map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+              <div className="summary-price">
+                <strong>{selectedPlan.price}</strong>
+                {selectedPlan.price !== "Custom" && (
+                  <small>
+                    {monthly ? " /month" : " /project"}
+                  </small>
+                )}
+              </div>
+            </div>
 
-              <button
-                type="button"
-                className={`btn ${p.pop ? "p" : ""}`}
-                onClick={() => handlePlanSelect(p)}
-              >
-                {p.cta}
+            <form className="pricing-inquiry-form" onSubmit={sendEmail}>
+              <div className="inquiry-fields">
+                <div className="inquiry-field">
+                  <label htmlFor="nexfinity-client-name">Your name</label>
+                  <input
+                    id="nexfinity-client-name"
+                    value={clientName}
+                    onChange={(event) => setClientName(event.target.value)}
+                    placeholder="Enter your full name"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+
+                <div className="inquiry-field">
+                  <label htmlFor="nexfinity-client-email">Email address</label>
+                  <input
+                    id="nexfinity-client-email"
+                    type="email"
+                    value={clientEmail}
+                    onChange={(event) => setClientEmail(event.target.value)}
+                    placeholder="you@company.com"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="inquiry-field">
+                <label htmlFor="nexfinity-inquiry-message">
+                  Inquiry details
+                </label>
+                <textarea
+                  id="nexfinity-inquiry-message"
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  rows={7}
+                  required
+                />
+                <small className="field-hint">
+                  Your plan, pricing, and included services are filled in
+                  automatically. You can edit this message before sending.
+                </small>
+              </div>
+
+              <button type="submit" className="btn p inquiry-submit">
+                Send Email <span aria-hidden="true">↗</span>
               </button>
-            </Reveal>
-          ))}
-        </div>
 
-        {selectedPlan && (
-          <div id="pricing-inquiry" className="pricing-inquiry">
-            <h3>Let's work together</h3>
-            <p>
-              Your {selectedPlan.name} plan is selected.
-              {" "}{selectedPlan.billingType}: {selectedPlan.price}
-            </p>
-
-            <form onSubmit={handleSendEmail}>
-              <label htmlFor="client-name">Your name</label>
-              <input
-                id="client-name"
-                type="text"
-                placeholder="Enter your name"
-                value={clientName}
-                onChange={(e) => setClientName(e.target.value)}
-                required
-              />
-
-              <label htmlFor="client-email">Your email</label>
-              <input
-                id="client-email"
-                type="email"
-                placeholder="Enter your email address"
-                value={clientEmail}
-                onChange={(e) => setClientEmail(e.target.value)}
-                required
-              />
-
-              <label htmlFor="inquiry-message">Inquiry details</label>
-              <textarea
-                id="inquiry-message"
-                rows="9"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-              />
-
-              <button type="submit" className="btn p">
-                Send Email
-              </button>
+              <p className="inquiry-note">
+                Your email application will open with the inquiry prepared.
+              </p>
             </form>
-          </div>
-        )}
-      </div>
+          </section>
+        </div>
+      )}
     </section>
   );
 }
