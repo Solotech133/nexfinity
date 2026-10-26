@@ -544,5 +544,32 @@ footer .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
   }
 }
 
+/* Nexfinity project description field */
+textarea[name="service"] {
+  width: 100%;
+  min-height: 140px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--tx);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.6;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+textarea[name="service"]::placeholder {
+  color: var(--mut);
+  opacity: 0.85;
+}
+
+textarea[name="service"]:focus {
+  outline: none;
+  border-color: var(--g);
+  box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.1);
+}
+
 }
 

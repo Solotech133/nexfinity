@@ -38,11 +38,16 @@ export default function Contact() {
         <Reveal as="form" onSubmit={submit} delay={120}>
           <input name="name" placeholder="Your name" required />
           <input name="email" type="email" placeholder="Your email" required />
-          <select name="service">
-            <option>Web / SaaS Development</option><option>Brand Identity</option>
-            <option>UI / UX Design</option><option>Social &amp; Content</option><option>AI &amp; Automation</option>
-          </select>
-          <textarea name="msg" placeholder="Tell us about your project..." required />
+         <div className="field">
+  <label htmlFor="service">Tell us about your project</label>
+  <textarea
+    id="service"
+    name="service"
+    placeholder="Describe what you need, your goals, preferred features, budget, and timeline..."
+    rows="5"
+    required
+  />
+</div>
           <button className="btn p" type="submit">Send via Gmail →</button>
         </Reveal>
       </div>
