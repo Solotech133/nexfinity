@@ -397,5 +397,152 @@ footer .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .lightbox{flex-direction:column;gap:14px}
 .lightbox img{max-width:min(92vw,1000px);max-height:80vh;border-radius:16px;border:1px solid var(--line);box-shadow:var(--glow);background:#000;object-fit:contain}
 .lb-title{color:var(--tx);font-weight:700;text-align:center}
+
+
+/* =========================================================
+   PRICING INQUIRY — selected plan and email form
+   ========================================================= */
+
+.pricing-inquiry {
+  width: 100%;
+  max-width: 680px;
+  margin: 48px auto 0;
+  padding: clamp(22px, 4vw, 36px);
+  text-align: left;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(57, 255, 20, 0.07),
+      transparent 45%
+    ),
+    var(--card);
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  border-radius: 22px;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.25);
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+  animation: inquiry-enter 0.35s ease both;
+}
+
+.pricing-inquiry h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 12px;
+}
+
+.pricing-inquiry > p {
+  color: var(--mut);
+  margin-bottom: 22px;
+  overflow-wrap: anywhere;
+}
+
+.pricing-inquiry form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.pricing-inquiry label {
+  color: var(--tx);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.pricing-inquiry input,
+.pricing-inquiry textarea {
+  width: 100%;
+  min-width: 0;
+  background: #050505;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--tx);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pricing-inquiry input::placeholder,
+.pricing-inquiry textarea::placeholder {
+  color: #777;
+}
+
+.pricing-inquiry input:focus,
+.pricing-inquiry textarea:focus {
+  outline: none;
+  border-color: var(--g);
+  box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.1);
+}
+
+.pricing-inquiry textarea {
+  min-height: 210px;
+  resize: vertical;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.pricing-inquiry .btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pricing-inquiry .btn.p {
+  background: var(--g);
+  color: #000;
+  border-color: var(--g);
+  font-weight: 800;
+}
+
+@keyframes inquiry-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Make the inquiry form comfortable on larger screens */
+@media (min-width: 600px) {
+  .pricing-inquiry {
+    margin-top: 56px;
+  }
+
+  .pricing-inquiry form {
+    gap: 14px;
+  }
+}
+
+/* Keep the form usable on smaller phones */
+@media (max-width: 380px) {
+  .pricing-inquiry {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .pricing-inquiry input,
+  .pricing-inquiry textarea {
+    padding: 12px;
+  }
+}
+
+/* Accessible focus for keyboard navigation */
+.pricing-inquiry .btn:focus-visible {
+  outline: 2px solid var(--g);
+  outline-offset: 4px;
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .pricing-inquiry {
+    animation: none;
+  }
+}
+
 }
 

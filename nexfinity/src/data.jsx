@@ -43,11 +43,76 @@ export const steps = [
   { title: "Deliver", text: "Launch, measure and keep improving together." },
 ];
 
+
 export const plans = [
-  { name: "Starter", monthly: "$200", project: "$500", features: ["Landing page or brand kit", "2 revisions per round", "Email support"], cta: "Get started" },
-  { name: "Growth", monthly: "$500", project: "$800", pop: true, features: ["Full website or web app", "Social content (7 posts)", "Priority support", "Monthly strategy call"], cta: "Get started" },
-  { name: "Scale", monthly: "Custom", project: "Custom", features: ["Dedicated team", "AI & automation builds", "Performance marketing", "24/7 support"], cta: "Talk to us" },
+  {
+    name: "Starter",
+    monthly: "$200",
+    project: "$500",
+    monthlyFeatures: [
+      "Ongoing website maintenance",
+      "Monthly content updates",
+      "Basic performance monitoring",
+      "Email support",
+      "Minor design improvements"
+    ],
+    projectFeatures: [
+      "One landing page and brand identity kit",
+      "Custom design tailored to your brand",
+      "Mobile-responsive design",
+      "2 revision rounds",
+      "Source files and final delivery"
+    ],
+    cta: "Get started"
+  },
+  {
+    name: "Growth",
+    monthly: "$500",
+    project: "$800",
+    pop: true,
+    monthlyFeatures: [
+      "Website or web app management",
+      "5 social media posts per month",
+      "Monthly performance report",
+      "Priority support",
+      "Monthly strategy consultation"
+    ],
+    projectFeatures: [
+      "Complete business website or web app",
+      "Custom UI/UX design",
+      "7 social media creatives",
+      "SEO and performance optimization",
+      "3 revision rounds",
+      "Launch support",
+      "Motion graphics"
+    ],
+    cta: "Get started"
+  },
+  {
+    name: "Scale",
+    monthly: "Custom",
+    project: "Custom",
+    monthlyFeatures: [
+      "Dedicated ongoing design and development",
+      "AI integrations and workflow automation",
+      "Continuous conversion optimization",
+      "Performance marketing support",
+      "Dedicated account management",
+      "Priority technical support"
+    ],
+    projectFeatures: [
+      "Custom enterprise-level solution",
+      "Advanced web application development",
+      "Brand identity and digital product design",
+      "AI and automation implementation",
+      "Analytics and reporting setup",
+      "Post-launch support",
+      "Motion graphics"
+    ],
+    cta: "Talk to us"
+  }
 ];
+
 
 export const quotes = [
   { text: "Nexfinity rebuilt our product UI and our sign-ups doubled in six weeks.", by: "Amaka O, Founder, savora Resturant" },
