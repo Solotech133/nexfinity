@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import Reveal from "./reveal.jsx";
+import Reveal from "./reveal";
 import { plans } from "../data";
 import "./Pricing.css";
 
