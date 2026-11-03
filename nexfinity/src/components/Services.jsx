@@ -1,4 +1,4 @@
-import Reveal from "./reveal.jsx";
+import Reveal from "./reveal";
 import { services } from "../data";
 
 // Card with a cursor-following spotlight
