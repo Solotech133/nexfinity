@@ -1,4 +1,4 @@
-import Reveal from "./Reveal.jsx";
+import Reveal from "./reveal";
 import { steps } from "../data";
 
 export default function Process() {
