@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav>
       <div className="wrap">
         <a href="#top" className="logo" aria-label="Nexfinity home">
-          <img src="/logo.png" alt="Nexfinity" />
+          <img src="/icons/logo.png" alt="Nexfinity" />
         </a>
         <div className={`links ${open ? "open" : ""}`}>
           {items.map((i) => (

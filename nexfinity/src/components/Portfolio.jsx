@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Reveal from "./reveal.jsx";
+import Reveal from "./Reveal.jsx";
 import { works, LINKS } from "../data";
 
 const filters = [

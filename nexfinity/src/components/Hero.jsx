@@ -1,4 +1,4 @@
-import Reveal from "./reveal.jsx";
+import Reveal from "./Reveal";
 
 export default function Hero() {
   return (
@@ -14,7 +14,7 @@ export default function Hero() {
           </div>
         </Reveal>
         <Reveal className="hero-img" delay={150}>
-          <img src="/hero.png" alt="Futuristic figure wearing a neon green VR visor" />
+          <img src="/icons/hero.png" alt="Futuristic figure wearing a neon green VR visor" />
           <div className="chip c1"><b>150+</b>Projects shipped</div>
           <div className="chip c2"><b>98%</b>Client satisfaction</div>
         </Reveal>
