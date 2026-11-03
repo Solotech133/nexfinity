@@ -1,4 +1,4 @@
-import Reveal from "./reveal.jsx";
+import Reveal from "./Reveal.jsx";
 import { quotes } from "../data";
 
 export default function Testimonials() {
